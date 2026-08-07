@@ -1,0 +1,56 @@
+.jogos-page {
+  background-color: var(--color-bg-page);
+  min-height: 100vh;
+}
+
+.jogos-section {
+  padding: 2rem 3rem 3rem;
+}
+
+.jogos-filters {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.jogos-filter-btn {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-soft);
+  color: #c3cede;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.55rem 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.jogos-filter-btn:hover {
+  border-color: var(--color-accent-green);
+}
+
+.jogos-filter-btn.active {
+  background-color: var(--color-accent-green);
+  border-color: var(--color-accent-green);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.jogos-loading {
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.jogos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .jogos-section {
+    padding: 1.5rem;
+  }
+}

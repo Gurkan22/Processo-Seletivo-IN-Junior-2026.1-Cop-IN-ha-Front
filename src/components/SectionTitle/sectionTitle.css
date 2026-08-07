@@ -1,0 +1,25 @@
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-title h2 {
+  color: #ffffff;
+  font-size: 1.15rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.section-title-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.section-title-arrow {
+  color: var(--color-accent-yellow);
+  flex-shrink: 0;
+}

@@ -1,0 +1,139 @@
+.admin-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  background-color: var(--color-bg-hero);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.1rem;
+}
+
+.admin-sidebar-brand {
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 1.25rem;
+}
+
+.admin-sidebar-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-sidebar-brand-row div {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar-title {
+  font-family: var(--font-display);
+  color: #ffffff;
+  font-size: 0.92rem;
+}
+
+.admin-sidebar-title-accent {
+  color: var(--color-accent-yellow);
+}
+
+.admin-sidebar-subtitle {
+  color: #a8b8d8;
+  font-size: 0.72rem;
+}
+
+.admin-sidebar-user {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.admin-sidebar-user-name {
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.admin-sidebar-user-email {
+  color: #a8b8d8;
+  font-size: 0.75rem;
+}
+
+.admin-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.admin-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #dde5f5;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.admin-sidebar-link:hover {
+  border-color: #ffffff;
+}
+
+.admin-sidebar-link.active {
+  background-color: var(--color-accent-green);
+  border-color: var(--color-accent-green);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.admin-sidebar-link-label {
+  flex: 1;
+}
+
+.admin-sidebar-link-count {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+}
+
+.admin-sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: none;
+  border: none;
+  color: #f87171;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  margin-top: 1.5rem;
+}
+
+.admin-sidebar-logout:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .admin-sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+}

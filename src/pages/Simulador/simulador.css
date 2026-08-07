@@ -1,0 +1,24 @@
+.simulador-page {
+  background-color: var(--color-bg-page);
+  min-height: 100vh;
+}
+
+.simulador-section {
+  padding: 2rem 3rem 3rem;
+}
+
+.simulador-loading {
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.simulador-group-block {
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .simulador-section {
+    padding: 1.5rem;
+  }
+}

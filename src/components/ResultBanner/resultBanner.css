@@ -1,0 +1,64 @@
+.result-banner {
+  background-color: var(--color-bg-card);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 260px;
+}
+
+.result-banner-label {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+
+.result-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.result-banner-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.result-banner-team img {
+  width: 28px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.result-banner-team span {
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.result-banner-score {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 900;
+  font-family: var(--font-display);
+  color: var(--color-accent-yellow);
+}
+
+.result-banner-x {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.result-banner-stadium {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  text-align: center;
+}

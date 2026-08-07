@@ -1,0 +1,116 @@
+.group-table {
+  background-color: var(--color-bg-card);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.group-table-header {
+  background-color: var(--color-bg-card-header);
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  font-family: var(--font-display);
+}
+
+.group-table-badge {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background-color: var(--color-accent-yellow);
+  display: inline-block;
+}
+
+.group-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.group-table th {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: normal;
+  text-align: center;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg-card-header);
+}
+
+.group-table th:nth-child(2) {
+  text-align: left;
+}
+
+.group-table td {
+  color: #ffffff;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.group-table-team-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: left;
+}
+
+.group-table-team-cell img {
+  width: 22px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.group-table-team-cell div {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-table-team-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.group-table-team-code {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+}
+
+.group-table-sg-positive {
+  color: #4ade80;
+}
+
+.group-table-sg-negative {
+  color: var(--color-danger);
+}
+
+.group-table-points {
+  font-weight: bold;
+}
+
+.group-table-qualified-divider td {
+  border-bottom: 2px solid var(--color-accent-green);
+}
+
+.group-table-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.group-table-legend-marker {
+  width: 12px;
+  height: 2px;
+  background-color: var(--color-accent-green);
+  display: inline-block;
+}

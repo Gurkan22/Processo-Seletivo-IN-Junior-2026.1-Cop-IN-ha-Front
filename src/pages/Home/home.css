@@ -1,0 +1,32 @@
+.home-page {
+  background-color: var(--color-bg-page);
+  min-height: 100vh;
+}
+
+.home-section {
+  padding: 2rem 3rem 3rem;
+}
+
+.home-loading {
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.home-news-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.home-news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .home-section {
+    padding: 1.5rem;
+  }
+}

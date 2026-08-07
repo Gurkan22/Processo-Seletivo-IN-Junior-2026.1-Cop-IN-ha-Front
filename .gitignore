@@ -1,0 +1,30 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+dist-ssr/
+
+# Ambiente
+.env
+.env.*
+.env.local
+.env.*.local
+
+# Cache e build
+.vite/
+coverage/
+*.tsbuildinfo
+.eslintcache
+
+# Editor
+.vscode/*
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

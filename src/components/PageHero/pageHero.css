@@ -1,0 +1,45 @@
+.page-hero {
+  background-color: var(--color-bg-hero);
+  padding: 2.5rem 3rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.page-hero-eyebrow {
+  display: block;
+  color: var(--color-accent-yellow);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.page-hero-title {
+  font-size: 3rem;
+  color: #ffffff;
+  margin: 0.5rem 0;
+  letter-spacing: 0.01em;
+}
+
+.page-hero-accent {
+  color: var(--color-accent-yellow);
+}
+
+.page-hero-subtitle {
+  color: #a8b8d8;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .page-hero-title {
+    font-size: 2.1rem;
+  }
+}

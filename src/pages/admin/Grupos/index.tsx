@@ -10,8 +10,6 @@ function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
 }
 
-const MIN_TEAMS_PER_GROUP = 4;
-
 export function AdminGrupos() {
   const [groups, setGroups] = useState<Omit<Group, 'standings'>[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
@@ -136,10 +134,8 @@ function CreateGroupModal({ teams, onClose, onCreated }: CreateGroupModalProps) 
       setError('Informe o nome do grupo.');
       return;
     }
-    if (selectedTeamIds.length < MIN_TEAMS_PER_GROUP) {
-      setError(`Selecione pelo menos ${MIN_TEAMS_PER_GROUP} times para formar o grupo.`);
-      return;
-    }
+    // Times são opcionais na criação: o grupo pode nascer vazio e
+    // receber times depois (na criação/edição de cada time).
 
     setLoading(true);
     try {
@@ -169,8 +165,13 @@ function CreateGroupModal({ teams, onClose, onCreated }: CreateGroupModalProps) 
         <div className="modal-field">
           <label>
             <Shield size={12} strokeWidth={2.25} style={{ display: 'inline', marginRight: 4 }} />
-            TIMES DO GRUPO (mínimo {MIN_TEAMS_PER_GROUP})
+            TIMES DO GRUPO (opcional — pode adicionar depois)
           </label>
+          {teams.length === 0 ? (
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.82rem' }}>
+              Nenhum time cadastrado ainda. Crie o grupo e depois cadastre os times vinculando a ele.
+            </p>
+          ) : (
           <div className="modal-checkbox-list">
             {teams.map((team) => (
               <label key={team.id} className="modal-checkbox-item">
@@ -183,6 +184,7 @@ function CreateGroupModal({ teams, onClose, onCreated }: CreateGroupModalProps) 
               </label>
             ))}
           </div>
+          )}
         </div>
 
         {error && <div className="modal-form-error">{error}</div>}

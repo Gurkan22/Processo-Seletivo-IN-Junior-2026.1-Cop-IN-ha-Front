@@ -112,9 +112,12 @@
   grid-template-columns: minmax(280px, 45%) 1fr;
 }
 
+.news-card-featured .news-card-image-wrapper {
+  height: 380px;
+}
+
 .news-card-featured .news-card-image {
   height: 100%;
-  min-height: 260px;
 }
 
 .news-card-featured .news-card-body {
@@ -159,5 +162,9 @@
 @media (max-width: 720px) {
   .news-card-featured {
     grid-template-columns: 1fr;
+  }
+
+  .news-card-featured .news-card-image-wrapper {
+    height: 220px;
   }
 }

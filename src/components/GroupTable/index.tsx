@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import type { Group } from '../../types';
 import './groupTable.css';
 
@@ -34,26 +35,33 @@ export function GroupTable({ group }: GroupTableProps) {
               standing.qualified && group.standings[index + 1] && !group.standings[index + 1].qualified;
 
             return (
-              <tr key={standing.team.id} className={isLastQualified ? 'group-table-qualified-divider' : ''}>
-                <td>{index + 1}</td>
-                <td className="group-table-team-cell">
-                  <img src={standing.team.flagUrl} alt={standing.team.name} />
-                  <div>
-                    <span className="group-table-team-name">{standing.team.name}</span>
-                    <span className="group-table-team-code">{standing.team.code}</span>
-                  </div>
-                </td>
-                <td>{standing.played}</td>
-                <td>{standing.wins}</td>
-                <td>{standing.draws}</td>
-                <td>{standing.losses}</td>
-                <td>{standing.goalsFor}</td>
-                <td>{standing.goalsAgainst}</td>
-                <td className={standing.goalDifference > 0 ? 'group-table-sg-positive' : standing.goalDifference < 0 ? 'group-table-sg-negative' : ''}>
-                  {standing.goalDifference > 0 ? `+${standing.goalDifference}` : standing.goalDifference}
-                </td>
-                <td className="group-table-points">{standing.points}</td>
-              </tr>
+              <Fragment key={standing.team.id}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td className="group-table-team-cell">
+                    <img src={standing.team.flagUrl} alt={standing.team.name} />
+                    <div>
+                      <span className="group-table-team-name">{standing.team.name}</span>
+                      <span className="group-table-team-code">{standing.team.code}</span>
+                    </div>
+                  </td>
+                  <td>{standing.played}</td>
+                  <td>{standing.wins}</td>
+                  <td>{standing.draws}</td>
+                  <td>{standing.losses}</td>
+                  <td>{standing.goalsFor}</td>
+                  <td>{standing.goalsAgainst}</td>
+                  <td className={standing.goalDifference > 0 ? 'group-table-sg-positive' : standing.goalDifference < 0 ? 'group-table-sg-negative' : ''}>
+                    {standing.goalDifference > 0 ? `+${standing.goalDifference}` : standing.goalDifference}
+                  </td>
+                  <td className="group-table-points">{standing.points}</td>
+                </tr>
+                {index < group.standings.length - 1 && (
+                  <tr className={isLastQualified ? 'group-table-divider-row' : 'group-table-divider-row soft'}>
+                    <td colSpan={10} />
+                  </tr>
+                )}
+              </Fragment>
             );
           })}
         </tbody>

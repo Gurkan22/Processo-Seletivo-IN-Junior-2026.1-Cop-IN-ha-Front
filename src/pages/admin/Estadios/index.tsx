@@ -80,7 +80,7 @@ export function AdminEstadios() {
       {editTarget && (
         <Modal title="Editar estádio" onClose={() => setEditTarget(null)} width={400}>
           <p style={{ color: '#c3cede', fontSize: '0.88rem', lineHeight: 1.6 }}>
-            Essa ação é apenas ilustrativa nesta entrega, conforme o Documento de Requisitos do Front.
+            Essa ação é apenas ilustrativa nesta entrega.
           </p>
           <div className="modal-actions">
             <button type="button" className="modal-btn modal-btn-ghost" onClick={() => setEditTarget(null)}>

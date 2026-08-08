@@ -122,9 +122,7 @@ export function AdminNoticias() {
           onClose={() => setIllustrativeOpen(null)}
         >
           <p style={{ color: '#c3cede', fontSize: '0.88rem', lineHeight: 1.6 }}>
-            Essa ação é apenas ilustrativa nesta entrega, conforme o Documento de Requisitos do Front — o
-            editor de notícias completo (upload de imagem, corpo do texto etc.) fica para quando o back
-            publicar as rotas de notícias.
+            Essa ação é apenas ilustrativa nesta entrega.
           </p>
           <div className="modal-actions">
             <button type="button" className="modal-btn modal-btn-ghost" onClick={() => setIllustrativeOpen(null)}>

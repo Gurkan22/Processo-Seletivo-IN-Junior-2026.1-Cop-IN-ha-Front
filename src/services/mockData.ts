@@ -153,14 +153,12 @@ export async function createGroupRequest(payload: {
     );
   }
 
-  cachedMatches = null;
   const finalGroup = await apiFetch<ApiGroup>(`/groups/${group.publicId}`);
   return mapGroup(finalGroup);
 }
 
 export async function deleteGroupRequest(id: string): Promise<void> {
   await apiFetch<void>(`/groups/${id}`, { method: 'DELETE' });
-  cachedMatches = null;
 }
 
 // --- Times ---------------------------------------------------------------
@@ -224,13 +222,11 @@ export async function createTeamRequest(payload: {
     }),
   });
   
-  cachedMatches = null;
   return mapTeam(team);
 }
 
 export async function deleteTeamRequest(id: string): Promise<void> {
   await apiFetch<void>(`/teams/${id}`, { method: 'DELETE' });
-  cachedMatches = null;
 }
 
 // --- Notícias --------------------------------------------------------------
@@ -273,51 +269,40 @@ export async function loginRequest(email: string, password: string): Promise<{ t
 
 // --- Jogos / Simulador / Estádios ------------------------------------
 
+interface ApiMatch {
+  id: number;
+  publicId: string;
+  date: string;
+  local: string;
+  homeGoals: number | null;
+  awayGoals: number | null;
+  status: 'ENCERRADO' | 'PROXIMO';
+  homeTeam: ApiTeam;
+  awayTeam: ApiTeam;
+  group: { publicId: string; name: string };
+}
 
-let mockStadiums: Stadium[] = [
-  { id: 's1', name: 'Maracanã', city: 'Rio de Janeiro', capacity: 78838 },
-  { id: 's2', name: 'Beira-Rio', city: 'Porto Alegre', capacity: 50128 },
-];
-
-let cachedMatches: Match[] | null = null;
-
-const FIXTURE_SCORES: Array<[number, number] | null> = [[3, 1], [1, 1], [2, 1], [2, 2], [1, 0], null, null, null];
-
-async function ensureMatches(): Promise<Match[]> {
-  if (cachedMatches) return cachedMatches;
-
-  const groups = await fetchGroups();
-  const matches: Match[] = [];
-  let counter = 0;
-
-  for (const group of groups) {
-    for (let i = 0; i + 1 < group.teams.length; i += 2) {
-      const score = FIXTURE_SCORES[counter % FIXTURE_SCORES.length];
-      counter += 1;
-      matches.push({
-        id: `m-${counter}`,
-        groupId: group.id,
-        homeTeam: group.teams[i],
-        awayTeam: group.teams[i + 1],
-        homeScore: score ? score[0] : null,
-        awayScore: score ? score[1] : null,
-        status: score ? 'finished' : 'scheduled',
-        date: new Date(Date.now() - counter * 86400000).toISOString(),
-        stadium: mockStadiums[counter % mockStadiums.length],
-      });
-    }
-  }
-
-  cachedMatches = matches;
-  return matches;
+function mapMatch(m: ApiMatch): Match {
+  return {
+    id: m.publicId,
+    groupId: m.group.publicId,
+    homeTeam: mapTeam(m.homeTeam),
+    awayTeam: mapTeam(m.awayTeam),
+    homeScore: m.homeGoals,
+    awayScore: m.awayGoals,
+    status: m.status === 'ENCERRADO' ? 'finished' : 'scheduled',
+    date: m.date,
+    stadium: { id: m.publicId, name: m.local, city: '' },
+  };
 }
 
 export async function fetchMatches(): Promise<Match[]> {
-  return ensureMatches();
+  const { matches } = await apiFetch<{ matches: ApiMatch[] }>('/matches');
+  return matches.map(mapMatch);
 }
 
 export async function fetchLatestResult(): Promise<Match | null> {
-  const matches = await ensureMatches();
+  const matches = await fetchMatches();
   const finished = matches.filter((m) => m.status === 'finished');
   if (finished.length === 0) return null;
   return [...finished].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
@@ -330,31 +315,33 @@ export async function createMatchRequest(payload: {
   stadiumId: string;
   date: string;
 }): Promise<Match> {
-  const matches = await ensureMatches();
-  const teams = await fetchAllTeams();
-  const homeTeam = teams.find((t) => t.id === payload.homeTeamId);
-  const awayTeam = teams.find((t) => t.id === payload.awayTeamId);
-  if (!homeTeam || !awayTeam) throw new Error('Selecione os dois times da partida.');
+  const stadiums = await fetchStadiums();
+  const local = stadiums.find((s) => s.id === payload.stadiumId)?.name ?? 'A definir';
 
-  const match: Match = {
-    id: `m-${Date.now()}`,
-    groupId: payload.groupId,
-    homeTeam,
-    awayTeam,
-    homeScore: null,
-    awayScore: null,
-    status: 'scheduled',
-    date: payload.date,
-    stadium: mockStadiums.find((s) => s.id === payload.stadiumId) ?? mockStadiums[0],
-  };
-  matches.push(match);
-  return match;
+  const { match } = await apiFetch<{ match: ApiMatch }>('/matches', {
+    method: 'POST',
+    body: JSON.stringify({
+      date: payload.date,
+      local,
+      homeTeamId: payload.homeTeamId,
+      awayTeamId: payload.awayTeamId,
+      groupId: payload.groupId,
+    }),
+  });
+  return mapMatch(match);
 }
 
 export async function deleteMatchRequest(id: string): Promise<void> {
-  const matches = await ensureMatches();
-  cachedMatches = matches.filter((m) => m.id !== id);
+  await apiFetch<void>(`/matches/${id}`, { method: 'DELETE' });
 }
+
+// Não existe entidade de estádio no backend (partidas só possuem o campo
+// "local"); mantemos uma lista fixa apenas para alimentar o seletor do
+// formulário de criação de jogos.
+let mockStadiums: Stadium[] = [
+  { id: 's1', name: 'Maracanã', city: 'Rio de Janeiro', capacity: 78838 },
+  { id: 's2', name: 'Beira-Rio', city: 'Porto Alegre', capacity: 50128 },
+];
 
 export async function fetchStadiums(): Promise<Stadium[]> {
   return mockStadiums;

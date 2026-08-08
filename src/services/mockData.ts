@@ -237,6 +237,11 @@ export async function fetchLatestNews(limit?: number): Promise<News[]> {
   return limit ? mapped.slice(0, limit) : mapped;
 }
 
+export async function fetchNewsPage(page: number): Promise<{ news: News[]; hasMore: boolean }> {
+  const news = await apiFetch<ApiNews[]>(`/news?page=${page}`);
+  return { news: news.map(mapNews), hasMore: news.length === 5 };
+}
+
 export async function fetchNewsById(id: string): Promise<News | null> {
   try {
     const news = await apiFetch<ApiNews | null>(`/news/${id}`);

@@ -170,20 +170,60 @@ export async function fetchAllTeams(): Promise<Team[]> {
   return teams.map(mapTeam);
 }
 
+const countryCodes: Record<string, string> = {
+  'QAT': 'qa',
+  'ECU': 'ec',
+  'SEN': 'sn',
+  'NED': 'nl',
+  'ENG': 'gb-eng',
+  'IRN': 'ir',
+  'USA': 'us',
+  'WAL': 'gb-wls',
+  'ARG': 'ar',
+  'KSA': 'sa',
+  'MEX': 'mx',
+  'POL': 'pl',
+  'FRA': 'fr',
+  'AUS': 'au',
+  'DEN': 'dk',
+  'TUN': 'tn',
+  'ESP': 'es',
+  'CRC': 'cr',
+  'GER': 'de',
+  'JPN': 'jp',
+  'BEL': 'be',
+  'CAN': 'ca',
+  'MAR': 'ma',
+  'CRO': 'hr',
+  'BRA': 'br',
+  'SRB': 'rs',
+  'SUI': 'ch',
+  'CMR': 'cm',
+  'POR': 'pt',
+  'GHA': 'gh',
+  'URU': 'uy',
+  'KOR': 'kr',
+};
+
 export async function createTeamRequest(payload: {
   name: string;
   code: string;
   groupId: string;
 }): Promise<Team> {
+  const acronym = payload.code.trim().toUpperCase();
+  
+  const flagCode = countryCodes[acronym] ?? acronym.substring(0, 2).toLowerCase();
+
   const team = await apiFetch<ApiTeam>('/teams', {
     method: 'POST',
     body: JSON.stringify({
       name: payload.name.trim(),
-      acronym: payload.code.trim().toUpperCase(),
-      flag: `https://flagcdn.com/w80/${payload.code.trim().toLowerCase()}.png`,
+      acronym: acronym,
+      flag: `https://flagcdn.com/w80/${flagCode}.png`,
       groupId: payload.groupId,
     }),
   });
+  
   cachedMatches = null;
   return mapTeam(team);
 }
